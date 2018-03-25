@@ -165,17 +165,17 @@
 	    "flexDirection": "column"
 	  },
 	  ".title": {
-	    "width": "100%",
 	    "height": "10%",
 	    "paddingTop": "0px",
 	    "paddingRight": "20px",
 	    "paddingBottom": "0px",
-	    "paddingLeft": "20px",
-	    "borderBottomWidth": "1px",
-	    "borderBottomColor": "#e6e6e6"
+	    "paddingLeft": "20px"
 	  },
 	  ".title input": {
+	    "width": "100%",
 	    "color": "#191919",
+	    "borderBottomWidth": "1px",
+	    "borderBottomColor": "#e6e6e6",
 	    "_meta": {
 	      "ruleDef": [
 	        {

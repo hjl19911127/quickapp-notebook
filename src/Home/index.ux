@@ -36,6 +36,7 @@
 
   .title {
     font-size: 36px;
+    white-space: nowrap;
   }
 
   .content {

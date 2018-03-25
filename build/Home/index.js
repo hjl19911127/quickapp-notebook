@@ -183,7 +183,8 @@
 	    "paddingLeft": "20px"
 	  },
 	  ".title": {
-	    "fontSize": "36px"
+	    "fontSize": "36px",
+	    "whiteSpace": "nowrap"
 	  },
 	  ".content": {
 	    "fontSize": "20px",
