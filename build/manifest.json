@@ -1,0 +1,57 @@
+{
+  "package": "com.quick.notebook",
+  "name": "quickapp-notebook",
+  "versionName": "1.0.0",
+  "versionCode": "1",
+  "minPlatformVersion": "101",
+  "icon": "/Common/logo.png",
+  "features": [
+    {
+      "name": "system.prompt"
+    },
+    {
+      "name": "system.router"
+    },
+    {
+      "name": "system.shortcut"
+    },
+    {
+      "name": "system.storage"
+    }
+  ],
+  "permissions": [
+    {
+      "origin": "*"
+    }
+  ],
+  "config": {
+    "logLevel": "log"
+  },
+  "router": {
+    "entry": "Home",
+    "pages": {
+      "Home": {
+        "component": "index"
+      },
+      "Edit": {
+        "component": "index"
+      },
+      "About": {
+        "component": "index"
+      }
+    }
+  },
+  "display": {
+    "titleBarBackgroundColor": "#4d2517",
+    "titleBarTextColor": "#ad9a94",
+    "menu": true,
+    "titleBarText": "快记事",
+    "pages": {
+      "Home": {},
+      "Edit": {},
+      "About": {
+        "menu": false
+      }
+    }
+  }
+}
