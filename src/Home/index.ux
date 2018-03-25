@@ -71,14 +71,22 @@
     },
     onMenuPress() {
       var prompt = require('@system.prompt');
+      var appInfo = require('@system.app').getInfo()
       prompt.showContextMenu({
-        itemList: ['清空数据', '取消'],
+        itemList: ['清空数据', '关于', '取消'],
         success: (ret) => {
           switch (ret.index) {
             case 0:
               this.$app.deleteData()
               break;
             case 1:
+              // 关于
+              router.push({
+                uri: '/About',
+                params: { name: appInfo.name, icon: appInfo.icon }
+              })
+              break;
+            case 2:
               // 取消
               break;
             default:

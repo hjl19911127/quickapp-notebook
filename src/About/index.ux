@@ -146,7 +146,7 @@
     data: {
       desc: '即点即用，让你省去下载安装的步骤，立即使用各类服务',
       serviceType: '工具类',
-      subjectInfo: 'xxx有限公司',
+      subjectInfo: '黄博士',
       copyright: ''
     },
     onInit () {
