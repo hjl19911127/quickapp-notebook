@@ -272,9 +272,9 @@
 	  },
 	  onShow: function onShow() {
 	    if (this.index) {
-	      var _$app$$def$data$items = this.$app.$def.data.items[this.index],
-	          title = _$app$$def$data$items.title,
-	          content = _$app$$def$data$items.content;
+	      var _$app$$def$getNote = this.$app.$def.getNote(this.index),
+	          title = _$app$$def$getNote.title,
+	          content = _$app$$def$getNote.content;
 	
 	      this.title = title;
 	      this.content = content;
@@ -290,21 +290,18 @@
 	    this.content = e.value;
 	  },
 	  handleSaveClick: function handleSaveClick(e) {
-	    var title = this.title,
-	        content = this.content,
-	        items = this.$app.$def.data.items;
+	    var _this = this;
 	
-	    var data = {
+	    var title = this.title,
+	        content = this.content;
+	
+	    this.$app.$def.saveNote({
 	      title: title,
 	      content: content,
 	      time: +new Date()
-	    };
-	    if (this.index) {
-	      items.splice(+this.index, 1, data);
-	    } else {
-	      items.push(data);
-	    }
-	    this.$app.saveData(this.handleCancelClick);
+	    }, this.index).then(function () {
+	      _this.handleCancelClick();
+	    });
 	  },
 	  handleCancelClick: function handleCancelClick(e) {
 	    _system2.default.back();

@@ -250,8 +250,9 @@
 	      success: function success(ret) {
 	        switch (ret.index) {
 	          case 0:
-	            _this.$app.$def.deleteAllData();
-	            _this.items = _this.$app.$def.data.items;
+	            _this.$app.$def.deleteNote().then(function (res) {
+	              _this.items = res;
+	            });
 	            break;
 	          case 1:
 	            _system2.default.push({
@@ -269,7 +270,7 @@
 	  },
 	  onShow: function onShow() {
 	    console.log('onShow');
-	    this.items = this.$app.$def.data.items;
+	    this.items = this.$app.$def.getNotes();
 	  },
 	  formatTime: function formatTime(time) {
 	    var timeOffset = -new Date().getTimezoneOffset() * 60 * 1000;
@@ -291,8 +292,9 @@
 	      success: function success(ret) {
 	        switch (ret.index) {
 	          case 0:
-	            _this2.$app.$def.deleteDataByIndex(index);
-	            _this2.items = _this2.items = _this2.$app.$def.data.items;
+	            _this2.$app.$def.deleteNote(index).then(function (res) {
+	              _this2.items = res;
+	            });
 	            break;
 	          case 1:
 	            break;

@@ -11,43 +11,33 @@
     data: {
       items: []
     },
-    deleteDataByIndex(index) {
-      this.data.items.splice(index, 1)
-      storage.set({
-        key: 'app_data',
-        value: JSON.stringify(this.$def.data.items),
-        success: (data) => {
-          console.log("handling success");
-          success()
-        },
-        fail: (data, code) => {
-          console.log("handling fail, code=" + code);
-        }
-      })
+    getNotes() {
+      return this.data.items
     },
-    deleteAllData() {
-      this.data.items = []
-      storage.delete({
-        key: 'app_data',
-        success: (data) => {
-          console.log("handling success");
-        },
-        fail: (data, code) => {
-          console.log("handling fail, code=" + code);
-        }
-      })
+    getNote(index) {
+      return this.data.items[index]
     },
-    saveData(success) {
-      storage.set({
-        key: 'app_data',
-        value: JSON.stringify(this.$def.data.items),
-        success: (data) => {
-          console.log("handling success");
-          success()
-        },
-        fail: (data, code) => {
-          console.log("handling fail, code=" + code);
-        }
+    saveNote(note, index) {
+      index ? this.data.items.splice(index, 1, note) : this.data.items.unshift(note)
+      return this.saveData()
+    },
+    deleteNote(index) {
+      index ? this.data.items.splice(index, 1) : this.data.items = []
+      return this.saveData()
+    },
+    saveData() {
+      return new Promise((resolve) => {
+        storage.set({
+          key: 'app_data',
+          value: JSON.stringify(this.data.items),
+          success: (data) => {
+            console.log("handling success");
+            resolve(this.data.items)
+          },
+          fail: (data, code) => {
+            console.log("handling fail, code=" + code);
+          }
+        })
       })
     },
     onCreate() {

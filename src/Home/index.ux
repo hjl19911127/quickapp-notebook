@@ -71,7 +71,7 @@
 <script>
   import router from '@system.router'
   import prompt from '@system.prompt'
-  var appInfo = require('@system.app').getInfo()
+  const appInfo = require('@system.app').getInfo()
 
   export default {
     private: {
@@ -83,8 +83,9 @@
         success: (ret) => {
           switch (ret.index) {
             case 0:
-              this.$app.$def.deleteAllData()
-              this.items = this.$app.$def.data.items
+              this.$app.$def.deleteNote().then((res) => {
+                this.items = res
+              })
               break;
             case 1:
               // 关于
@@ -104,7 +105,7 @@
     },
     onShow() {
       console.log('onShow')
-      this.items = this.$app.$def.data.items
+      this.items = this.$app.$def.getNotes()
     },
     formatTime(time) {
       let timeOffset = - (new Date().getTimezoneOffset()) * 60 * 1000
@@ -127,8 +128,9 @@
         success: (ret) => {
           switch (ret.index) {
             case 0:
-              this.$app.$def.deleteDataByIndex(index)
-              this.items = this.items = this.$app.$def.data.items
+              this.$app.$def.deleteNote(index).then((res) => {
+                this.items = res
+              })
               break;
             case 1:
               break;

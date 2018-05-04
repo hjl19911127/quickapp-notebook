@@ -73,7 +73,7 @@
     },
     onShow() {
       if (this.index) {
-        let { title, content } = this.$app.$def.data.items[this.index]
+        let { title, content } = this.$app.$def.getNote(this.index)
         this.title = title;
         this.content = content;
       }
@@ -88,18 +88,14 @@
       this.content = e.value
     },
     handleSaveClick(e) {
-      let { title, content } = this, items = this.$app.$def.data.items;
-      let data = {
+      let { title, content } = this
+      this.$app.$def.saveNote({
         title,
         content,
         time: +new Date()
-      }
-      if (this.index) {
-        items.splice(+this.index, 1, data)
-      } else {
-        items.push(data)
-      }
-      this.$app.saveData(this.handleCancelClick);
+      }, this.index).then(() => {
+        this.handleCancelClick()
+      })
     },
     handleCancelClick(e) {
       router.back()
