@@ -29,7 +29,7 @@
     </div>
 
     <!-- 创建快捷方式 -->
-    <input class="btn" type="button" onclick="createShortcut" value="创建快捷方式">
+    <input class="btn" type="button" onclick="createShortcut" value="创建快捷方式" />
 
     <!-- 版权信息 -->
     <text id="footer">{{copyright}}</text>
@@ -138,12 +138,15 @@
    * 默认的菜单页(可自定义)
    * name默认为manifest文件中的name字段
    * icon默认为manifest文件中的icon字段
-   * 若需修改页面中文本，请修改VM data中对应变量
+   * 若需修改页面中文本，请修改ViewModel private中对应变量
    * 注意：使用加载器测试`创建桌面快捷方式`功能时，需要进入系统设置->权限管理->开启应用加载器的`桌面快捷方式`权限，才能保存到桌面。应用上线后可自动获取`桌面快捷方式`权限
    */
   export default {
-    props: ['name', 'icon'],
-    data: {
+    protected: {
+      name: null,
+      icon: null
+    },
+    private: {
       desc: '即点即用，让你省去下载安装的步骤，立即使用各类服务',
       serviceType: '工具类',
       subjectInfo: '黄博士',
@@ -155,7 +158,7 @@
     },
     createShortcut () {
       // 创建快捷方式
-      this.$app.createShortcut()
+      this.$app.$def.createShortcut()
     }
   }
 </script>

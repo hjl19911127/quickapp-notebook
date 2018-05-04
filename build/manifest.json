@@ -25,7 +25,8 @@
     }
   ],
   "config": {
-    "logLevel": "log"
+    "logLevel": "log",
+    "debug": true
   },
   "router": {
     "entry": "Home",

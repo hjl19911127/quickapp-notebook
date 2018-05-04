@@ -2,14 +2,14 @@
   <div class="layout">
     <list class="list">
       <block for="(index,item) in items">
-        <list-item type="product" class="list-item" @click="edit(index.toString())">
+        <list-item type="note" class="list-item" @click="handleClick(index)" @longpress="handleLongPress(index)">
           <text class="title">{{item.title}}</text>
           <text class="content">{{item.content}}</text>
           <text class="time">{{formatTime(item.time)}}</text>
         </list-item>
       </block>
     </list>
-    <input class="fixed-btn" type="button" value="+" @click="edit('')">
+    <input class="fixed-btn" type="button" value="+" @click="handleClick('')">
   </div>
 </template>
 
@@ -36,12 +36,18 @@
 
   .title {
     font-size: 36px;
+    width: 100%;
+    text-overflow: ellipsis;
+    lines: 1;
+    margin-bottom: 10px;
   }
 
   .content {
     font-size: 20px;
     color: #aaaaaa;
     margin-bottom: 40px;
+    text-overflow: ellipsis;
+    lines: 1;
   }
 
   .time {
@@ -64,20 +70,21 @@
 
 <script>
   import router from '@system.router'
+  import prompt from '@system.prompt'
+  var appInfo = require('@system.app').getInfo()
 
   export default {
-    data: {
+    private: {
       items: []
     },
     onMenuPress() {
-      var prompt = require('@system.prompt');
-      var appInfo = require('@system.app').getInfo()
       prompt.showContextMenu({
         itemList: ['清空数据', '关于', '取消'],
         success: (ret) => {
           switch (ret.index) {
             case 0:
-              this.$app.deleteData()
+              this.$app.$def.deleteAllData()
+              this.items = this.$app.$def.data.items
               break;
             case 1:
               // 关于
@@ -100,9 +107,10 @@
       this.items = this.$app.$def.data.items
     },
     formatTime(time) {
-      return new Date(time).toJSON().split('.')[0].replace('T', ' ')
+      let timeOffset = - (new Date().getTimezoneOffset()) * 60 * 1000
+      return new Date(time + timeOffset).toISOString().split('.')[0].replace('T', ' ')
     },
-    edit(index) {
+    handleClick(index) {
       router.push({
         uri: '/Edit',
         params: {
@@ -110,8 +118,24 @@
         }
       })
     },
-    swipe(e) {
-      console.log(JSON.stringify(e))
+    handleLongPress(index) {
+      prompt.showContextMenu({
+        itemList: [
+          '删除',
+          '取消'
+        ],
+        success: (ret) => {
+          switch (ret.index) {
+            case 0:
+              this.$app.$def.deleteDataByIndex(index)
+              this.items = this.items = this.$app.$def.data.items
+              break;
+            case 1:
+              break;
+          }
+
+        }
+      })
     }
   }
 </script>

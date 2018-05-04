@@ -61,12 +61,15 @@
 
 <script>
   import router from '@system.router'
+  import prompt from '@system.prompt'
 
   export default {
-    data: {
-      title: '',
-      content: '',
+    public: {
       index: ''
+    },
+    private: {
+      title: '',
+      content: ''
     },
     onShow() {
       if (this.index) {
