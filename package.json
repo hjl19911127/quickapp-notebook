@@ -1,6 +1,6 @@
 {
   "name": "quickapp-notebook",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "subversion": {
     "toolkit": "0.0.31",
     "packager": "0.0.5"

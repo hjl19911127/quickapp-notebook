@@ -18,11 +18,11 @@
       return this.data.items[index]
     },
     saveNote(note, index) {
-      index ? this.data.items.splice(index, 1, note) : this.data.items.unshift(note)
+      index !== undefined && index !== "" ? this.data.items.splice(index, 1, note) : this.data.items.unshift(note)
       return this.saveData()
     },
     deleteNote(index) {
-      index ? this.data.items.splice(index, 1) : this.data.items = []
+      index !== undefined && index !== "" ? this.data.items.splice(index, 1) : this.data.items = []
       return this.saveData()
     },
     saveData() {

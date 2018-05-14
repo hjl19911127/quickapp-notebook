@@ -88,12 +88,12 @@
       this.content = e.value
     },
     handleSaveClick(e) {
-      let { title, content } = this
+      let { title, content, index } = this
       this.$app.$def.saveNote({
         title,
         content,
         time: +new Date()
-      }, this.index).then(() => {
+      }, index).then(() => {
         this.handleCancelClick()
       })
     },
